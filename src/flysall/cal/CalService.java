@@ -29,6 +29,7 @@ public class CalService {
 	 * 
 	 * @return String
 	 */
+	
 	public String callMethod(String cmd, String text) throws Exception{
 		if (cmd.equals("C")) {
 			return clearAll();
