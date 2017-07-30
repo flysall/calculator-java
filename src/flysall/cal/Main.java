@@ -1,5 +1,5 @@
 package flysall.cal;
-//bug在panel21
+
 import javax.swing.JFrame;
 
 public class Main {

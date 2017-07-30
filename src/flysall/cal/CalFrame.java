@@ -10,30 +10,31 @@ import java.util.*;
  * 
  * @author yangenxiong yangenxiong2009@gmail.com
  * @author Kelvin Mak kelvin.mak125@gmail.com
- * @version  1.0
+ * @version 1.0
  */
-public class CalFrame extends JFrame{
+public class CalFrame extends JFrame {
 	private JTextField textField = null;
-	private String[] mOp = {"MC", "MR", "MS", "M+"};
-	private String[] rOp = {"Back", "CE", "C"};
-	private String[] nOp = { "7", "8", "9", "/", "sqrt", "4", "5", "6", "*",
-			"%", "1", "2", "3", "-", "1/x", "0", "+/-", ".", "+", "=" };
+	private String[] mOp = { "MC", "MR", "MS", "M+" };
+	private String[] rOp = { "Back", "CE", "C" };
+	private String[] nOp = { "7", "8", "9", "/", "sqrt", "4", "5", "6", "*", "%", "1", "2", "3", "-", "1/x", "0", "+/-",
+			".", "+", "=" };
 	private JButton button = null;
 	private CalService service = new CalService();
 	private ActionListener actionListener = null;
 	private final int PRE_WIDTH = 360;
 	private final int PRE_HEIGHT = 250;
-	
+
 	/**
 	 * default constructor
 	 */
-	public CalFrame(){
+	public CalFrame() {
 		super();
 		initialize();
 	}
-	
+
 	/**
 	 * initrialize the UI
+	 * 
 	 * @return void
 	 */
 	private void initialize(){
@@ -52,7 +53,7 @@ public class CalFrame extends JFrame{
 		}
 		JButton[] rButton = getRButton();
 		JPanel panel2 = new JPanel();
-		panel2.setLayout(new GridLayout(1,5));
+		panel2.setLayout(new BorderLayout(1,5));
 		// 新建一个panel，用于放置按钮
 		JPanel panel21 = new JPanel();
 		panel21.setLayout(new GridLayout(1,3,3,3));
@@ -72,7 +73,7 @@ public class CalFrame extends JFrame{
 		panel.add(panel2, BorderLayout.CENTER);
 		this.add(panel);
 	}
-	
+
 	/**
 	 * 这个方法用来获取监听器
 	 * 
@@ -80,7 +81,7 @@ public class CalFrame extends JFrame{
 	 */
 	public ActionListener getActionListener() {
 		if (actionListener == null) {
-			actionListener = new ActionListener(){
+			actionListener = new ActionListener() {
 				/**
 				 * 实现接口中的actionPerformed方法
 				 * 
@@ -91,17 +92,17 @@ public class CalFrame extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					String cmd = e.getActionCommand();
 					String result = null;
-					try{
-						result = service.callMethod(cmd,  textField.getText());
+					try {
+						result = service.callMethod(cmd, textField.getText());
 					} catch (Exception el) {
 						System.out.println(el.getMessage());
 					}
 					// 处理button的标记
-					if (cmd.indexOf("MC") == 0) {		
+					if (cmd.indexOf("MC") == 0) {
 						button.setText("M");
 					}
 					// 设置计算结果
-					if(result !=  null) {
+					if (result != null) {
 						textField.setText(result);
 					}
 				}
@@ -109,7 +110,7 @@ public class CalFrame extends JFrame{
 		}
 		return actionListener;
 	}
-	
+
 	/**
 	 * 
 	 * @return javax.swing.JButton
@@ -120,7 +121,7 @@ public class CalFrame extends JFrame{
 		}
 		return button;
 	}
-	
+
 	/**
 	 * 这个方法初始化输入框
 	 * 
@@ -134,6 +135,7 @@ public class CalFrame extends JFrame{
 		}
 		return textField;
 	}
+
 	/**
 	 * 此方法获得计算器的存储操作键
 	 * 
@@ -145,12 +147,12 @@ public class CalFrame extends JFrame{
 		for (int i = 0; i < this.mOp.length; i++) {
 			JButton b = new JButton(this.mOp[i]);
 			b.addActionListener(getActionListener());
-			b.setBackground(Color.red);
-			result[i+1] = b;
+			b.setForeground(Color.red);
+			result[i + 1] = b;
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 此方法获得计算器的结果操作键
 	 * 
@@ -158,7 +160,7 @@ public class CalFrame extends JFrame{
 	 */
 	private JButton[] getRButton() {
 		JButton[] result = new JButton[rOp.length];
-		for(int i = 0; i < rOp.length; i++){
+		for (int i = 0; i < rOp.length; i++) {
 			JButton b = new JButton(this.rOp[i]);
 			b.addActionListener(getActionListener());
 			b.setBackground(Color.red);
@@ -166,23 +168,22 @@ public class CalFrame extends JFrame{
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 此方法获得计算器的其它操作键
 	 * 
 	 * @return 保存JButton的数组
 	 */
 	private JButton[] getNButton() {
-		String[] redButton = {"/", "*", "-", "+", "=" };
+		String[] redButton = { "/", "*", "-", "+", "=" };
 		JButton[] result = new JButton[nOp.length];
-		for(int i = 0; i < this.nOp.length; i++) {
+		for (int i = 0; i < this.nOp.length; i++) {
 			JButton b = new JButton(this.nOp[i]);
 			b.addActionListener(getActionListener());
 			Arrays.sort(redButton);
-			if(Arrays.binarySearch(redButton,  nOp[i]) >= 0) {
+			if (Arrays.binarySearch(redButton, nOp[i]) >= 0) {
 				b.setForeground(Color.red);
-			} 
-			else {
+			} else {
 				b.setForeground(Color.blue);
 			}
 			result[i] = b;
@@ -190,21 +191,3 @@ public class CalFrame extends JFrame{
 		return result;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
