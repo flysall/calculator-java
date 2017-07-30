@@ -7,10 +7,6 @@ import java.util.*;
 
 /**
  * 界面对象
- * 
- * @author yangenxiong yangenxiong2009@gmail.com
- * @author Kelvin Mak kelvin.mak125@gmail.com
- * @version 1.0
  */
 public class CalFrame extends JFrame {
 	private JTextField textField = null;
